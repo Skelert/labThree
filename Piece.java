@@ -10,21 +10,21 @@ public class Piece {
     public String row;
 
     public Piece() {
-        this.pieceName = "Piece";
+        this.pieceName = "piece";
         this.color = null;
         this.column = null;
         this.row = null;
     }
 
     public Piece(String color, String col, String row) {
-        this.pieceName = "Piece";
+        this.pieceName = "piece";
         this.color = color.toLowerCase();
         this.column = col.toLowerCase();
         this.row = row;
     }
 
     public Piece(String color, String col, String row, String pieceName) {
-        this.pieceName = pieceName;
+        this.pieceName = pieceName.toLowerCase();
         this.color = color.toLowerCase();
         this.column = col.toLowerCase();
         this.row = row;
@@ -48,6 +48,10 @@ public class Piece {
 
     public String getColor() {
         return this.color;
+    }
+
+    public String getPieceName() {
+        return this.pieceName;
     }
 
     public boolean inBounds(int[] coordinate) {
