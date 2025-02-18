@@ -136,6 +136,23 @@ public class labThree {
         return newCreatedPiece;
     }
 
+    public static void verifyEachPiece(String attackCoordinates){
+        //iterate through inUse array
+        //verify each piece using very verifyTarget
+
+        //check if attack coordinate and piece coordinate 
+        //are the same and respond accordingly
+
+        //empty out the inUse array
+    }
+
+    public static String notInUse(){
+        // return string containing pieces not currently
+        // inside inUseArray
+        // example:
+        // king, rook, queen, pawn ...
+        return "";  
+    }
 
     public static void setAllSixPieces() {
         for (int i = 0; i < inUseArray.length; i += 1) {
@@ -146,7 +163,7 @@ public class labThree {
     public static void game(){
         setAllSixPieces();
         String target = getCoordinates("where do you want to attack", "try again");
-        // verifyEachPiece(target);
+        verifyEachPiece(target);
     }
 
     public static void main(String[] args) {
