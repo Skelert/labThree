@@ -136,13 +136,20 @@ public class labThree {
         return newCreatedPiece;
     }
 
+
     public static void setAllSixPieces() {
         for (int i = 0; i < inUseArray.length; i += 1) {
             inUseArray[i] = createChessPiece();
         }
     }
 
-    public static void main(String[] args) {
+    public static void game(){
         setAllSixPieces();
+        String target = getCoordinates("where do you want to attack", "try again");
+        // verifyEachPiece(target);
+    }
+
+    public static void main(String[] args) {
+        game();
     }
 }
