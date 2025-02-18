@@ -114,9 +114,9 @@ public class labThree {
         Piece newCreatedPiece = new Piece();
 
         switch (piece) {
-            // case "KING":
-            // newCreatedPiece = new King(color, coordinateCol, coordinateRow);
-            // break;
+            case "KING":
+                newCreatedPiece = new King(color, coordinateCol, coordinateRow);
+                break;
             // case "QUEEN":
             // newCreatedPiece = new Queen(color, coordinateCol, coordinateRow);
             // break;
