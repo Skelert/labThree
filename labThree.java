@@ -86,42 +86,51 @@ public class labThree {
         return getContinue(tryAgain, tryAgain);
     }
 
-    public Piece[] inUseArray = new Piece[6];
+    public static Piece[] inUseArray = new Piece[6];
+
+    // public static boolean isInUseArray(String piece){
+    // }
 
     public static Piece createChessPiece() {
         String piece = getPiece("what piece", "try again");
-        String color = getColor("what piece", "try again");
+        String color = getColor("what color", "try again");
         String coordinates = getCoordinates("what coordinates", "try again");
 
         String coordinateCol = coordinates.split("")[0];
         String coordinateRow = coordinates.split("")[1];
 
-        Piece newCreatedPiece;
+        Piece newCreatedPiece = new Piece();
 
         switch (piece) {
-
-            case "KING":
-                newCreatedPiece = new King(color, coordinateCol, coordinateRow);
-                break;
-            case "QUEEN":
-                newCreatedPiece = new Queen(color, coordinateCol, coordinateRow);
-                break;
-            case "ROOK":
-                newCreatedPiece = new Rook(color, coordinateCol, coordinateRow);
-                break;
+            // case "KING":
+            //     newCreatedPiece = new King(color, coordinateCol, coordinateRow);
+            //     break;
+            // case "QUEEN":
+            //     newCreatedPiece = new Queen(color, coordinateCol, coordinateRow);
+            //     break;
+            // case "ROOK":
+            //     newCreatedPiece = new Rook(color, coordinateCol, coordinateRow);
+            //     break;
             case "KNIGHT":
                 newCreatedPiece = new Knight(color, coordinateCol, coordinateRow);
                 break;
-            case "PAWN":
-                newCreatedPiece = new Pawn(color, coordinateCol, coordinateRow);
-                break;
-            case "BISHOP":
-                newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
-                break;
+            // case "PAWN":
+            //     newCreatedPiece = new Pawn(color, coordinateCol, coordinateRow);
+            //     break;
+            // case "BISHOP":
+            //     newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
+            //     break;
         }
         return newCreatedPiece;
     }
 
+    public static void setAllSixPieces(){
+        for(int i = 0; i < 1; i+=1){
+            inUseArray[i] = createChessPiece();
+        }
+    }
+
     public static void main(String[] args) {
+        
     }
 }
