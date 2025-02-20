@@ -33,13 +33,4 @@ public class King extends Queen{
         }
         return newArray;
     }
-
-    public static void main(String[] args) {
-        King test = new King("White","g", "1" );
-        int[][] arr = test.generateCoordinates();
-        for(int i = 0; i < arr.length; i+=1){
-            System.out.println(arr[i][0]+","+arr[i][1]);
-        }
-
-    }
 }
