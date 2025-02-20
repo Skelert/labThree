@@ -88,20 +88,43 @@ public class labThree {
 
     public static Piece[] inUseArray = new Piece[6];
 
+    public static String notInUse() {
+        String notIn = "KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN";
+
+        for (PieceType myVar : PieceType.values()) {
+            String curr = myVar.toString();
+            for (int i = 0; i < inUseArray.length; i++) {
+                Piece curInUse = inUseArray[i];
+                if (curInUse == null) {
+                    continue;
+                }
+                if (curr.equals(curInUse.pieceName.toUpperCase())) {
+                    if (curr.equals("PAWN")) {
+                        notIn = notIn.replace(", " + curr, "");
+                    }
+                    notIn = notIn.replace(curr + ", ", "");
+                }
+            }
+        }
+        return notIn;
+    }
+
     public static boolean isInUseArray(String piece) {
         for (int i = 0; i < inUseArray.length; i += 1) {
             Piece cur = inUseArray[i];
             if (cur == null)
                 continue;
-            
-            if (cur.getPieceName().equals(piece.toLowerCase()))
+
+            if (cur.getPieceName().toLowerCase().equals(piece.toLowerCase()))
                 return true;
         }
         return false;
     }
 
     public static Piece createChessPiece() {
-        String piece = getPiece("what piece", "try again");
+        // String notIn = notInUse();
+        String piece = getPiece("what piece? options: (" + notInUse() + ")",
+                "try again  options: (" + notInUse() + ")");
         while (isInUseArray(piece)) {
             piece = getPiece("sorry thats already been used try again", "try again");
         }
@@ -129,29 +152,21 @@ public class labThree {
             // case "PAWN":
             // newCreatedPiece = new Pawn(color, coordinateCol, coordinateRow);
             // break;
-            // case "BISHOP":
-            // newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
-            // break;
+            case "BISHOP":
+            newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
+            break;
         }
         return newCreatedPiece;
     }
 
-    public static void verifyEachPiece(String attackCoordinates){
-        //iterate through inUse array
-        //verify each piece using very verifyTarget
+    public static void verifyEachPiece(String attackCoordinates) {
+        // iterate through inUse array
+        // verify each piece using very verifyTarget
 
-        //check if attack coordinate and piece coordinate 
-        //are the same and respond accordingly
+        // check if attack coordinate and piece coordinate
+        // are the same and respond accordingly
 
-        //empty out the inUse array
-    }
-
-    public static String notInUse(){
-        // return string containing pieces not currently
-        // inside inUseArray
-        // example:
-        // king, rook, queen, pawn ...
-        return "";  
+        // empty out the inUse array
     }
 
     public static void setAllSixPieces() {
@@ -160,10 +175,10 @@ public class labThree {
         }
     }
 
-    public static void game(){
+    public static void game() {
         setAllSixPieces();
-        String target = getCoordinates("where do you want to attack", "try again");
-        verifyEachPiece(target);
+        // String target = getCoordinates("where do you want to attack", "try again");
+        // verifyEachPiece(target);
     }
 
     public static void main(String[] args) {
