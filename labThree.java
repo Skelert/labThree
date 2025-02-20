@@ -143,15 +143,15 @@ public class labThree {
             case "QUEEN":
                 newCreatedPiece = new Queen(color, coordinateCol, coordinateRow);
                 break;
-            // case "ROOK":
-            // newCreatedPiece = new Rook(color, coordinateCol, coordinateRow);
-            // break;
+            case "ROOK":
+                newCreatedPiece = new Rook(color, coordinateCol, coordinateRow);
+                break;
             case "KNIGHT":
                 newCreatedPiece = new Knight(color, coordinateCol, coordinateRow);
                 break;
-            // case "PAWN":
-            // newCreatedPiece = new Pawn(color, coordinateCol, coordinateRow);
-            // break;
+            case "PAWN":
+                newCreatedPiece = new Pawn(color, coordinateCol, coordinateRow);
+                break;
             case "BISHOP":
                 newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
                 break;
@@ -165,16 +165,15 @@ public class labThree {
         for (int i = 0; i < inUseArray.length; i += 1) {
             Piece currPiece = inUseArray[i];
             boolean valid = currPiece.verifyTarget(col, row);
-            if(attackCoordinates.equals(currPiece.getColumn()+""+currPiece.getRow())){
-                System.out.println(currPiece.pieceName+" is already at "+attackCoordinates );
+            if (attackCoordinates.equals(currPiece.getColumn() + "" + currPiece.getRow())) {
+                System.out.println(currPiece.pieceName + " is already at " + attackCoordinates);
+            } else if (valid) {
+                System.out.println(currPiece.pieceName + " at " + currPiece.getColumn() + "" + currPiece.getRow()
+                        + " can attack " + attackCoordinates);
+            } else {
+                System.out.println(currPiece.pieceName + " at " + currPiece.getColumn() + "" + currPiece.getRow()
+                        + " can not attack " + attackCoordinates);
             }
-            else if(valid){
-                System.out.println(currPiece.pieceName+" at "+currPiece.getColumn()+""+currPiece.getRow()+" can attack "+attackCoordinates );
-            }
-            else{
-                System.out.println(currPiece.pieceName+" at "+currPiece.getColumn()+""+currPiece.getRow()+" can not attack "+attackCoordinates );
-            }
-
 
         }
     }
