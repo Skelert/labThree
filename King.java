@@ -1,7 +1,4 @@
-import java.util.Vector;
-//Author: Didier A.L
-
-public class King extends Piece { // change class name
+public class King extends Queen{
 
     public King() {
         this.pieceName = "king";
@@ -17,41 +14,17 @@ public class King extends Piece { // change class name
 
     @Override
     public int[][] generateCoordinates() {
-        Vector<int[]> vector = new Vector<>();
-        String letters = "abcdefgh";
-        String numbers = "87654321";
+        int[][] arr = makeBishopCoordinates(true);
+        int[][] arrTwo = makeRookCoordinates(true);
 
-        int rows = numbers.indexOf(this.row);
-        int cols = letters.indexOf(this.column);
+        int length1 = arr.length;
+        int length2 = arrTwo.length;
 
-        int[] top = { rows - 1, cols };
-        int[] topLeft = { rows - 1, cols - 1 };
-        int[] topRight = { rows - 1, cols + 1 };
+        int[][] result = new int[length1 + length2][2];
 
-        int[] left = { rows, cols - 1 };
-        int[] right = { rows, cols + 1 };
+        System.arraycopy(arr, 0, result, 0, length1);
+        System.arraycopy(arrTwo, 0, result, length1, length2);
 
-        int[] bottom = { rows + 1, cols };
-        int[] bottomLeft = { rows + 1, cols - 1 };
-        int[] bottomRight = { rows + 1, cols + 1 };
-
-        if (inBounds(top))
-            vector.add(top);
-        if (inBounds(topLeft))
-            vector.add(topLeft);
-        if (inBounds(topRight))
-            vector.add(topRight);
-        if (inBounds(left))
-            vector.add(left);
-        if (inBounds(right))
-            vector.add(right);
-        if (inBounds(bottom))
-            vector.add(bottom);
-        if (inBounds(bottomLeft))
-            vector.add(bottomLeft);
-        if (inBounds(bottomRight))
-            vector.add(bottomRight);
-
-        return vectorToArray(vector);
+        return result;
     }
 }
