@@ -140,9 +140,9 @@ public class labThree {
             case "KING":
                 newCreatedPiece = new King(color, coordinateCol, coordinateRow);
                 break;
-            // case "QUEEN":
-            // newCreatedPiece = new Queen(color, coordinateCol, coordinateRow);
-            // break;
+            case "QUEEN":
+                newCreatedPiece = new Queen(color, coordinateCol, coordinateRow);
+                break;
             // case "ROOK":
             // newCreatedPiece = new Rook(color, coordinateCol, coordinateRow);
             // break;
@@ -153,32 +153,42 @@ public class labThree {
             // newCreatedPiece = new Pawn(color, coordinateCol, coordinateRow);
             // break;
             case "BISHOP":
-            newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
-            break;
+                newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
+                break;
         }
         return newCreatedPiece;
     }
 
     public static void verifyEachPiece(String attackCoordinates) {
-        // iterate through inUse array
-        // verify each piece using very verifyTarget
+        String col = attackCoordinates.split("")[0];
+        String row = attackCoordinates.split("")[1];
+        for (int i = 0; i < 1; i += 1) {
+            Piece currPiece = inUseArray[i];
+            boolean valid = currPiece.verifyTarget(col, row);
+            if(attackCoordinates.equals(currPiece.getColumn()+""+currPiece.getRow())){
+                System.out.println(currPiece.pieceName+" is already at "+attackCoordinates );
+            }
+            else if(valid){
+                System.out.println(currPiece.pieceName+" at "+currPiece.getColumn()+""+currPiece.getRow()+" can attack "+attackCoordinates );
+            }
+            else{
+                System.out.println(currPiece.pieceName+" at "+currPiece.getColumn()+""+currPiece.getRow()+" can not attack "+attackCoordinates );
+            }
 
-        // check if attack coordinate and piece coordinate
-        // are the same and respond accordingly
 
-        // empty out the inUse array
+        }
     }
 
     public static void setAllSixPieces() {
-        for (int i = 0; i < inUseArray.length; i += 1) {
+        for (int i = 0; i < 1; i += 1) {
             inUseArray[i] = createChessPiece();
         }
     }
 
     public static void game() {
         setAllSixPieces();
-        // String target = getCoordinates("where do you want to attack", "try again");
-        // verifyEachPiece(target);
+        String target = getCoordinates("where do you want to attack", "try again");
+        verifyEachPiece(target);
     }
 
     public static void main(String[] args) {
