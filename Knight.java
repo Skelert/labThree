@@ -8,7 +8,7 @@ public class Knight extends Piece {
     }
 
     public Knight(String color, String col, String row) {
-        super(color, col, row);
+        super(color, col, row,"knight");
     }
 
     public Knight(String color, String col, String row, String pieceName) {
