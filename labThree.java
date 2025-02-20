@@ -160,13 +160,24 @@ public class labThree {
     }
 
     public static void verifyEachPiece(String attackCoordinates) {
+        public static void verifyEachPiece(String attackCoordinates) {
         // iterate through inUse array
+        for (int i = 0; i < inUseArray.length; i++) {
+        Piece currentPiece = inUseArray[i];
+        if (currentPiece == null) continue;
         // verify each piece using very verifyTarget
+        if (currentPiece.verifyTarget(attackCoordinates)) {
+            System.out.println(currentPiece.getPieceName() + " at " + currentPiece.getColumn() + currentPiece.getRow() + 
+                               " can attack " + attackCoordinates);
+            anyPieceCanAttack = true;
+        }
 
         // check if attack coordinate and piece coordinate
         // are the same and respond accordingly
 
         // empty out the inUse array
+         for (int i = 0; i < inUseArray.length; i++) {
+        inUseArray[i] = null;
     }
 
     public static void setAllSixPieces() {
