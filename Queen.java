@@ -52,7 +52,7 @@ public class Queen extends Bishop {
 
     @Override
     public int[][] generateCoordinates() {
-        int[][] arr = super.makeBishopCoordinates(false);
+        int[][] arr = makeBishopCoordinates(false);
         int[][] arrTwo = makeRookCoordinates(false);
 
         int length1 = arr.length;
