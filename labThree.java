@@ -162,7 +162,7 @@ public class labThree {
     public static void verifyEachPiece(String attackCoordinates) {
         String col = attackCoordinates.split("")[0];
         String row = attackCoordinates.split("")[1];
-        for (int i = 0; i < 1; i += 1) {
+        for (int i = 0; i < inUseArray.length; i += 1) {
             Piece currPiece = inUseArray[i];
             boolean valid = currPiece.verifyTarget(col, row);
             if(attackCoordinates.equals(currPiece.getColumn()+""+currPiece.getRow())){
@@ -180,7 +180,7 @@ public class labThree {
     }
 
     public static void setAllSixPieces() {
-        for (int i = 0; i < 1; i += 1) {
+        for (int i = 0; i < inUseArray.length; i += 1) {
             inUseArray[i] = createChessPiece();
         }
     }
