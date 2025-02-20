@@ -65,19 +65,4 @@ public class Queen extends Bishop {
 
         return result;
     }
-
-    public static void main(String[] args) {
-        Queen test = new Queen("white", "g", "1");
-        System.out.println(test.getColor());
-        System.out.println(test.getColumn());
-        System.out.println(test.getRow());
-
-        int[][] arr = test.generateCoordinates();
-
-        for (int i = 0; i < arr.length; i += 1) {
-            int[] curArr = arr[i];
-            System.out.println("(" + curArr[0] + "," + curArr[1] + ")");
-        }
-    }
-
 }
