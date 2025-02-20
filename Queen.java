@@ -16,36 +16,42 @@ public class Queen extends Bishop {
 
     public int[][] makeRookCoordinates(boolean forceStop) {
         Vector<int[]> vector = new Vector<>();
+
         String letters = "abcdefgh";
         String numbers = "87654321";
+
         int rows = numbers.indexOf(this.row);
         int cols = letters.indexOf(this.column);
 
-        for (int i = 0; i < 8; i++) {
-            if (i != cols) {
-                int[] coordinate = { rows, i };
-                if (inBounds(coordinate)) {
-                    vector.add(coordinate);
-                }
-            }
-
-            if (forceStop) {
+        // up down left right
+        for (int i = cols - 1; i >= 0; i -= 1) {
+            int[] left = { rows, i };
+            vector.add(left);
+            if(forceStop){
                 break;
             }
         }
-        for (int i = 0; i < 8; i++) {
-            if (i != rows) {
-                int[] coordinate = { i, cols };
-                if (inBounds(coordinate)) {
-                    vector.add(coordinate);
-                }
-            }
-
-            if (forceStop) {
+        for (int i = cols + 1; i <= 7; i += 1) {
+            int[] right = { rows, i };
+            vector.add(right);
+            if(forceStop){
                 break;
             }
         }
-
+        for (int i = rows - 1; i >= 0; i -= 1) {
+            int[] up = { i, cols };
+            vector.add(up);
+            if(forceStop){
+                break;
+            }
+        }
+        for (int i = rows + 1; i <= 7; i += 1) {
+            int[] down = { i, cols };
+            vector.add(down);
+            if(forceStop){
+                break;
+            }
+        }
         return vectorToArray(vector);
 
     }
