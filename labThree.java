@@ -20,6 +20,28 @@ public class labThree {
         NO
     }
 
+    enum Rows {
+        R1,
+        R2,
+        R3,
+        R4,
+        R5,
+        R6,
+        R7,
+        R8
+    }
+
+    enum Columns {
+        A,
+        B,
+        C,
+        D,
+        E,
+        F,
+        G,
+        H
+    }
+
     public static void clearTerminal() {
         System.out.print("\33[H\033[2J");
         System.out.flush();
@@ -53,23 +75,53 @@ public class labThree {
         return getColor(tryAgain, tryAgain);
     }
 
-    public static String getCoordinates(String message, String tryAgain) {
-        checkCoordinates coordinateCheck = new checkCoordinates();
-        Scanner userInput = new Scanner(System.in);
-        System.out.println(message);
-        String chessCoordinates = userInput.nextLine();
-        String col = chessCoordinates.split("")[0];
-        String row = chessCoordinates.split("")[1];
+    public static String getCoordinates(String message1, String message2, String tryAgain) {
 
-        if (chessCoordinates.length() != 2) {
-            return getCoordinates("must be two characters", tryAgain);
-        }
+        checkCoordinates coordinateCheck = new checkCoordinates();
+
+        String col = getCol(message1, tryAgain);
+        String row = getRow(message2, tryAgain);
+        String chessCoordinates = "" + col + row;
 
         if (coordinateCheck.withinChessBoard(col, row)) {
             clearTerminal();
             return chessCoordinates;
         }
-        return getCoordinates(tryAgain, tryAgain);
+
+        return getCoordinates("position out of bounds, input your column again", message2, tryAgain);
+
+    }
+
+    public static String getCol(String message, String tryAgain) {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println(message);
+        String col = userInput.nextLine().toUpperCase();
+        for (Columns myVar : Columns.values()) {
+            String curr = myVar.toString();
+            if (curr.equals(col)) {
+                clearTerminal();
+                return col;
+            }
+        }
+
+        return getCol(tryAgain, tryAgain);
+
+    }
+
+    public static String getRow(String message, String tryAgain) {
+        Scanner userInput = new Scanner(System.in);
+        System.out.println(message);
+        String row = userInput.nextLine().toUpperCase();
+        for (Rows myVar : Rows.values()) {
+            String curr = myVar.toString().substring(1, 2);
+            if (curr.equals(row)) {
+                clearTerminal();
+                return row;
+            }
+        }
+
+        return getRow(tryAgain, tryAgain);
+
     }
 
     public static String getContinue(String message, String tryAgain) {
@@ -122,14 +174,14 @@ public class labThree {
     }
 
     public static Piece createChessPiece() {
-        // String notIn = notInUse();
         String piece = getPiece("what piece? options: (" + notInUse() + ")",
                 "try again  options: (" + notInUse() + ")");
         while (isInUseArray(piece)) {
             piece = getPiece("sorry thats already been used try again", "try again");
         }
         String color = getColor("what color", "try again");
-        String coordinates = getCoordinates("what coordinates", "try again");
+        String coordinates = getCoordinates("what is the starting column of your piece",
+                "what is the starting row of your piece", "try again");
 
         String coordinateCol = coordinates.split("")[0];
         String coordinateRow = coordinates.split("")[1];
@@ -140,33 +192,42 @@ public class labThree {
             case "KING":
                 newCreatedPiece = new King(color, coordinateCol, coordinateRow);
                 break;
-            // case "QUEEN":
-            // newCreatedPiece = new Queen(color, coordinateCol, coordinateRow);
-            // break;
-            // case "ROOK":
-            // newCreatedPiece = new Rook(color, coordinateCol, coordinateRow);
-            // break;
+            case "QUEEN":
+                newCreatedPiece = new Queen(color, coordinateCol, coordinateRow);
+                break;
+            case "ROOK":
+                newCreatedPiece = new Rook(color, coordinateCol, coordinateRow);
+                break;
             case "KNIGHT":
                 newCreatedPiece = new Knight(color, coordinateCol, coordinateRow);
                 break;
-            // case "PAWN":
-            // newCreatedPiece = new Pawn(color, coordinateCol, coordinateRow);
-            // break;
+            case "PAWN":
+                newCreatedPiece = new Pawn(color, coordinateCol, coordinateRow);
+                break;
             case "BISHOP":
-            newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
-            break;
+                newCreatedPiece = new Bishop(color, coordinateCol, coordinateRow);
+                break;
         }
         return newCreatedPiece;
     }
 
     public static void verifyEachPiece(String attackCoordinates) {
-        // iterate through inUse array
-        // verify each piece using very verifyTarget
+        String col = attackCoordinates.split("")[0];
+        String row = attackCoordinates.split("")[1];
+        for (int i = 0; i < inUseArray.length; i += 1) {
+            Piece currPiece = inUseArray[i];
+            boolean valid = currPiece.verifyTarget(col, row);
+            if (attackCoordinates.equals(currPiece.getColumn() + "" + currPiece.getRow())) {
+                System.out.println(currPiece.pieceName + " is already at " + attackCoordinates);
+            } else if (valid) {
+                System.out.println(currPiece.pieceName + " at " + currPiece.getColumn() + "" + currPiece.getRow()
+                        + " can attack " + attackCoordinates);
+            } else {
+                System.out.println(currPiece.pieceName + " at " + currPiece.getColumn() + "" + currPiece.getRow()
+                        + " can not attack " + attackCoordinates);
+            }
 
-        // check if attack coordinate and piece coordinate
-        // are the same and respond accordingly
-
-        // empty out the inUse array
+        }
     }
 
     public static void setAllSixPieces() {
@@ -177,8 +238,9 @@ public class labThree {
 
     public static void game() {
         setAllSixPieces();
-        // String target = getCoordinates("where do you want to attack", "try again");
-        // verifyEachPiece(target);
+        String target = getCoordinates("What is the column of your attack position",
+                "What is the row of your attack position", "try again");
+        verifyEachPiece(target);
     }
 
     public static void main(String[] args) {

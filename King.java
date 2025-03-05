@@ -17,14 +17,20 @@ public class King extends Queen{
         int[][] arr = makeBishopCoordinates(true);
         int[][] arrTwo = makeRookCoordinates(true);
 
-        int length1 = arr.length;
-        int length2 = arrTwo.length;
+        int[][] newArray = new int[arr.length+ arrTwo.length][2];
+        int newArrayIndex = 0;
 
-        int[][] result = new int[length1 + length2][2];
+        for (int i = 0; i < arr.length; i += 1) {
+            int[] curr = { arr[i][0], arr[i][1] };
+            newArray[newArrayIndex] = curr;
+            newArrayIndex +=1;
+        }
 
-        System.arraycopy(arr, 0, result, 0, length1);
-        System.arraycopy(arrTwo, 0, result, length1, length2);
-
-        return result;
+        for (int i = 0; i < arrTwo.length; i += 1) {
+            int[] curr = { arrTwo[i][0], arrTwo[i][1] };
+            newArray[newArrayIndex] = curr;
+            newArrayIndex +=1;
+        }
+        return newArray;
     }
 }
